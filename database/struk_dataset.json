@@ -1,0 +1,219 @@
+[
+  {
+    "ocr_text": "06 el £ LT iy\n\nP s ik\nP BRANDING G 1 200 -\nANVIVAIRIOE. 1 3,500 35004\n(B LEVONEOIN. 143,90 48,900\nDise. - <14,000 R\ne I\nTt Ten. 3 w6\n(% 14,00\nI Balanja < 3,608\n% . 100,003\n@ . 61400\nB DA ,\nst o SG e SRR ae st\nT R L G 8\ni e\nTl B e D\n\n| s ‘%*e« | ?;& )j\nB sz%%}i\\;;ﬁf'%z‘&%‘:—;E‘ '\n",
+    "parsed_items": [],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1750744821910_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-24T06:00:25.809Z"
+  },
+  {
+    "ocr_text": "06 el £ LT iy\n\nP s ik\nP BRANDING G 1 200 -\nANVIVAIRIOE. 1 3,500 35004\n(B LEVONEOIN. 143,90 48,900\nDise. - <14,000 R\ne I\nTt Ten. 3 w6\n(% 14,00\nI Balanja < 3,608\n% . 100,003\n@ . 61400\nB DA ,\nst o SG e SRR ae st\nT R L G 8\ni e\nTl B e D\n\n| s ‘%*e« | ?;& )j\nB sz%%}i\\;;ﬁf'%z‘&%‘:—;E‘ '\n",
+    "parsed_items": [],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1750745091247_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-24T06:04:54.809Z"
+  },
+  {
+    "ocr_text": "06 el £ LT iy\n\nP s ik\nP BRANDING G 1 200 -\nANVIVAIRIOE. 1 3,500 35004\n(B LEVONEOIN. 143,90 48,900\nDise. - <14,000 R\ne I\nTt Ten. 3 w6\n(% 14,00\nI Balanja < 3,608\n% . 100,003\n@ . 61400\nB DA ,\nst o SG e SRR ae st\nT R L G 8\ni e\nTl B e D\n\n| s ‘%*e« | ?;& )j\nB sz%%}i\\;;ﬁf'%z‘&%‘:—;E‘ '\n",
+    "parsed_items": [
+      {
+        "name": "ANVIVAIRIOE",
+        "amount": 35004
+      }
+    ],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1750745472097_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-24T06:11:15.774Z"
+  },
+  {
+    "ocr_text": "A\nCIDATAR - XAB GARUT\nJl. Raya Cidatar Cikajang Kel. Cidaier Keo\n. ClSUrupan Xab. barut adlbi, caisd\n07.11.20-15:45  2.1.75 45172/0557 wlDCY\nJAVANA TEH MUATI 350 5 3650 150\nARGR s, 1,000\nVE JAVANATERMLT /P SAYAT MAS 24995\nig i M\nD aa\nLAYAKAN (CASUMEY =¥ 1I TR Dal\n",
+    "parsed_items": [
+      {
+        "name": "JAVANA",
+        "amount": 3650
+      },
+      {
+        "name": "ARGR",
+        "amount": 1000
+      }
+    ],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1750745685831_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-24T06:14:47.597Z"
+  },
+  {
+    "ocr_text": "A\nCIDATAR - XAB GARUT\nJl. Raya Cidatar Cikajang Kel. Cidaier Keo\n. ClSUrupan Xab. barut adlbi, caisd\n07.11.20-15:45  2.1.75 45172/0557 wlDCY\nJAVANA TEH MUATI 350 5 3650 150\nARGR s, 1,000\nVE JAVANATERMLT /P SAYAT MAS 24995\nig i M\nD aa\nLAYAKAN (CASUMEY =¥ 1I TR Dal\n",
+    "parsed_items": [],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1750749949066_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-24T07:25:51.033Z"
+  },
+  {
+    "ocr_text": "",
+    "parsed_items": [],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1750749983717_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-24T07:26:24.441Z"
+  },
+  {
+    "ocr_text": "A\nCIDATAR - XAB GARUT\nJl. Raya Cidatar Cikajang Kel. Cidaier Keo\n. ClSUrupan Xab. barut adlbi, caisd\n07.11.20-15:45  2.1.75 45172/0557 wlDCY\nJAVANA TEH MUATI 350 5 3650 150\nARGR s, 1,000\nVE JAVANATERMLT /P SAYAT MAS 24995\nig i M\nD aa\nLAYAKAN (CASUMEY =¥ 1I TR Dal\n",
+    "parsed_items": [],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1750749982746_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-24T07:26:24.870Z"
+  },
+  {
+    "ocr_text": "A\nCIDATAR - XAB GARUT\nJl. Raya Cidatar Cikajang Kel. Cidaier Keo\n. ClSUrupan Xab. barut adlbi, caisd\n07.11.20-15:45  2.1.75 45172/0557 wlDCY\nJAVANA TEH MUATI 350 5 3650 150\nARGR s, 1,000\nVE JAVANATERMLT /P SAYAT MAS 24995\nig i M\nD aa\nLAYAKAN (CASUMEY =¥ 1I TR Dal\n",
+    "parsed_items": [],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1750749983491_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-24T07:26:25.355Z"
+  },
+  {
+    "ocr_text": "i :;_‘;:ﬁ.“‘.t:::g::::::::::‘:::'::w e ;?g\nKP BRANDING G) 1 20 e\nAUVIVAIRTOON. 1 3,500 3;500:4\nLB LEMNEOM. 1 43,900 48,9004\nDise, - ~14,000\nTofet Jtem. 3 5260\nae - 14,000\nbl %6048\ng an o SBI\n%WMM‘S?PPN‘M%@\ni 1 N R T e a MNA KRR SN a L P\nPRSI s s s eee n\n\nSl Me s Y e\n\no ol T .\nB e\n",
+    "parsed_items": [
+      {
+        "name": "LB LEMNEOM",
+        "amount": 48900
+      },
+      {
+        "name": "Tofet Jtem",
+        "amount": 5260
+      }
+    ],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1750750012208_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-24T07:26:55.924Z"
+  },
+  {
+    "ocr_text": "i :;_‘;:ﬁ.“‘.t:::g::::::::::‘:::'::w e ;?g\nKP BRANDING G) 1 20 e\nAUVIVAIRTOON. 1 3,500 3;500:4\nLB LEMNEOM. 1 43,900 48,9004\nDise, - ~14,000\nTofet Jtem. 3 5260\nae - 14,000\nbl %6048\ng an o SBI\n%WMM‘S?PPN‘M%@\ni 1 N R T e a MNA KRR SN a L P\nPRSI s s s eee n\n\nSl Me s Y e\n\no ol T .\nB e\n",
+    "parsed_items": [
+      {
+        "name": "LB LEMNEOM",
+        "amount": 48900
+      },
+      {
+        "name": "Tofet Jtem",
+        "amount": 5260
+      }
+    ],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1750750441547_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-24T07:34:07.955Z"
+  },
+  {
+    "ocr_text": "i :;_‘;:ﬁ.“‘.t:::g::::::::::‘:::'::w e ;?g\nKP BRANDING G) 1 20 e\nAUVIVAIRTOON. 1 3,500 3;500:4\nLB LEMNEOM. 1 43,900 48,9004\nDise, - ~14,000\nTofet Jtem. 3 5260\nae - 14,000\nbl %6048\ng an o SBI\n%WMM‘S?PPN‘M%@\ni 1 N R T e a MNA KRR SN a L P\nPRSI s s s eee n\n\nSl Me s Y e\n\no ol T .\nB e\n",
+    "parsed_items": [
+      {
+        "name": "LB LEMNEOM",
+        "amount": 48900
+      },
+      {
+        "name": "Tofet Jtem",
+        "amount": 5260
+      }
+    ],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1750752004568_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-24T08:00:08.810Z"
+  },
+  {
+    "ocr_text": "i :;_‘;:ﬁ.“‘.t:::g::::::::::‘:::'::w e ;?g\nKP BRANDING G) 1 20 e\nAUVIVAIRTOON. 1 3,500 3;500:4\nLB LEMNEOM. 1 43,900 48,9004\nDise, - ~14,000\nTofet Jtem. 3 5260\nae - 14,000\nbl %6048\ng an o SBI\n%WMM‘S?PPN‘M%@\ni 1 N R T e a MNA KRR SN a L P\nPRSI s s s eee n\n\nSl Me s Y e\n\no ol T .\nB e\n",
+    "parsed_items": [
+      {
+        "name": "LB LEMNEOM",
+        "amount": 48900
+      },
+      {
+        "name": "Tofet Jtem",
+        "amount": 5260
+      }
+    ],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1750752661215_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-24T08:11:04.857Z"
+  },
+  {
+    "ocr_text": "i :;_‘;:ﬁ.“‘.t:::g::::::::::‘:::'::w e ;?g\nKP BRANDING G) 1 20 e\nAUVIVAIRTOON. 1 3,500 3;500:4\nLB LEMNEOM. 1 43,900 48,9004\nDise, - ~14,000\nTofet Jtem. 3 5260\nae - 14,000\nbl %6048\ng an o SBI\n%WMM‘S?PPN‘M%@\ni 1 N R T e a MNA KRR SN a L P\nPRSI s s s eee n\n\nSl Me s Y e\n\no ol T .\nB e\n",
+    "parsed_items": [
+      {
+        "name": "LB LEMNEOM",
+        "amount": 48900
+      },
+      {
+        "name": "Tofet Jtem",
+        "amount": 5260
+      }
+    ],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1750752754759_pre.jpg",
+    "user_confirmed": true,
+    "timestamp": "2025-06-24T08:12:38.842Z"
+  },
+  {
+    "ocr_text": "Sl O OBEI aa 3 R4 vy\nKP BRANDING | 1 T\nTANGO CHO 1156 1 9,2533 s,é%\nDisc. -2,000\nPOPHIE vy 758 1 4700 4710 B\n8 STR 1804 T m 4 150 . *I\nDise, 260 4 i\ne s N A\nTotal iten 4 15150 s\nTotal Diso, =4 -\nDOWASIKU SENGAKD Ty — -\n",
+    "parsed_items": [
+      {
+        "name": "POPHIE vy",
+        "amount": 4710
+      }
+    ],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1751326020396_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-30T23:27:02.811Z"
+  },
+  {
+    "ocr_text": "NGI DA\n",
+    "parsed_items": [],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1751326066697_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-30T23:27:47.422Z"
+  },
+  {
+    "ocr_text": "aa EB SA\n\n0 i MaI\nB 3100, e\n\nsME\nK na i G G\n==t\ne\nHe =\ni\ni 5a\n£ i '\nR na\nL\n",
+    "parsed_items": [],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1751326084652_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-30T23:28:05.900Z"
+  },
+  {
+    "ocr_text": "BresaTalk\n) S BA\nPR\nLS e\nBRE—F <\ne\nEb Mm\n| Db T\n1 Bank 0f Golk T\n1 aa\ni &\n| i i\n) &5\nDL B o 0 o 18 T —\n22t B\nT ke\nPPN st s |12 110k\n",
+    "parsed_items": [],
+    "total": null,
+    "user": "6282314744505@c.us",
+    "image_file": "D:\\wa-finance-bot\\database\\ocr_temp_1751326128969_pre.jpg",
+    "user_confirmed": null,
+    "timestamp": "2025-06-30T23:28:50.566Z"
+  }
+]

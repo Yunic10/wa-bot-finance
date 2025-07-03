@@ -1,0 +1,50 @@
+{
+  "name": "wa-finance-bot",
+  "version": "1.0.0",
+  "description": "WhatsApp Finance Bot untuk rekap pengeluaran otomatis",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:sqlite": "node src/index-sqlite.js",
+    "dev": "nodemon src/index.js",
+    "dev:sqlite": "nodemon src/index-sqlite.js",
+    "test": "node test/test-bot.js",
+    "setup": "bash scripts/setup.sh",
+    "docker:build": "docker build -t wa-finance-bot .",
+    "docker:run": "docker-compose up -d",
+    "docker:stop": "docker-compose down",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop wa-finance-bot",
+    "pm2:restart": "pm2 restart wa-finance-bot",
+    "pm2:logs": "pm2 logs wa-finance-bot"
+  },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "finance",
+    "expense",
+    "tracker"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "moment": "^2.29.4",
+    "mysql2": "^3.6.5",
+    "node-cron": "^3.0.3",
+    "qrcode-terminal": "^0.12.0",
+    "sharp": "^0.34.2",
+    "sqlite3": "^5.1.6",
+    "string-similarity": "^4.0.4",
+    "tesseract.js": "^4.0.3",
+    "whatsapp-web.js": "^1.23.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

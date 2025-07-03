@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: wa-finance-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${DB_NAME:-wa_finance_bot}
+      MYSQL_USER: ${DB_USER:-finance_bot}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-rootpassword}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+    networks:
+      - finance-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # WhatsApp Finance Bot
+  bot:
+    build: .
+    container_name: wa-finance-bot
+    restart: unless-stopped
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=${DB_USER:-finance_bot}
+      - DB_PASSWORD=${DB_PASSWORD:-rootpassword}
+      - DB_NAME=${DB_NAME:-wa_finance_bot}
+      - DB_PORT=3306
+      - PORT=3000
+      - NODE_ENV=production
+      - TZ=Asia/Jakarta
+      - MONTHLY_REPORT_CRON=${MONTHLY_REPORT_CRON:-0 20 28-31 * *}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src/.wwebjs_auth:/app/src/.wwebjs_auth
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - finance-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Nginx Reverse Proxy (Optional)
+  nginx:
+    image: nginx:alpine
+    container_name: wa-finance-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - bot
+    networks:
+      - finance-network
+    profiles:
+      - production
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  finance-network:
+    driver: bridge 

@@ -7,7 +7,12 @@ const dbConfig = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME || 'postgres',
   port: process.env.DB_PORT || 5432,
-  ssl: { rejectUnauthorized: false } // Supabase butuh SSL
+  ssl: {
+    rejectUnauthorized: false,
+    sslmode: 'require'
+  },
+  connectionTimeoutMillis: 10000,
+  idleTimeoutMillis: 30000
 };
 
 const pool = new Pool(dbConfig);
@@ -20,7 +25,12 @@ async function testConnection() {
     client.release();
     return true;
   } catch (error) {
-    console.error('❌ Database connection failed:', error.message);
+    console.error('❌ Database connection failed:', error);
+    console.error('❌ Error details:', {
+      message: error.message,
+      code: error.code,
+      stack: error.stack
+    });
     return false;
   }
 }

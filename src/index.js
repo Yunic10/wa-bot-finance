@@ -38,8 +38,14 @@ class WhatsAppFinanceBot {
       res.json({
         status: 'OK',
         timestamp: new Date().toISOString(),
-        botStatus: this.client ? 'Connected' : 'Disconnected'
+        botStatus: this.client ? 'Connected' : 'Disconnected',
+        database: 'Checking...'
       });
+    });
+
+    // Simple health check for Render
+    this.app.get('/ping', (req, res) => {
+      res.send('pong');
     });
 
     // Bot status endpoint
@@ -182,7 +188,7 @@ class WhatsAppFinanceBot {
     });
 
     const PORT = process.env.PORT || 3000;
-    this.app.listen(PORT, () => {
+    this.app.listen(PORT, '0.0.0.0', () => {
       console.log(`🌐 Express server running on port ${PORT}`);
     });
   }

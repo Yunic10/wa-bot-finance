@@ -16,7 +16,9 @@
     "pm2:start": "pm2 start ecosystem.config.js",
     "pm2:stop": "pm2 stop wa-finance-bot",
     "pm2:restart": "pm2 restart wa-finance-bot",
-    "pm2:logs": "pm2 logs wa-finance-bot"
+    "pm2:logs": "pm2 logs wa-finance-bot",
+    "render:build": "npm install",
+    "render:start": "npm start"
   },
   "keywords": [
     "whatsapp",

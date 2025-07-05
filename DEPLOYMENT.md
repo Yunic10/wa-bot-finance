@@ -409,3 +409,112 @@ mysql -u finance_bot -p -e "SELECT table_name, ROUND(((data_length + index_lengt
 - **Schedule**: Setiap Minggu jam 02:00-04:00 WIB
 - **Duration**: 2 jam
 - **Notification**: 24 jam sebelumnya via email 
+
+## Render Deployment
+
+### Prerequisites
+- GitHub repository dengan kode bot
+- Supabase database (PostgreSQL)
+- Render account (free tier)
+
+### Step 1: Prepare Repository
+```bash
+git add .
+git commit -m "Prepare for Render deployment"
+git push origin main
+```
+
+### Step 2: Deploy to Render
+
+1. **Login ke Render Dashboard**
+   - Buka https://render.com
+   - Login dengan GitHub account
+
+2. **Create New Web Service**
+   - Klik "New +" → "Web Service"
+   - Connect GitHub repository
+   - Pilih repository `wa-finance-bot`
+
+3. **Configure Service**
+   - **Name:** `wa-finance-bot`
+   - **Environment:** `Node`
+   - **Build Command:** `npm install`
+   - **Start Command:** `npm start`
+   - **Plan:** `Free`
+
+4. **Environment Variables**
+   ```
+   DB_HOST=zcuxxncdafmlrrxdcwgm.supabase.co
+   DB_PORT=5432
+   DB_NAME=postgres
+   DB_USER=postgres
+   DB_PASSWORD=bobobotduit2229
+   BOT_NAME=FinanceBot
+   ADMIN_NUMBER=6282314744505
+   NODE_ENV=production
+   MONTHLY_REPORT_CRON=0 20 28-31 * *
+   TZ=Asia/Jakarta
+   ```
+
+5. **Deploy**
+   - Klik "Create Web Service"
+   - Tunggu build dan deployment selesai
+
+### Step 3: Connect WhatsApp
+
+1. **Access QR Code**
+   - Buka URL: `https://your-app-name.onrender.com/qr-page`
+   - Atau: `https://your-app-name.onrender.com/qr`
+
+2. **Scan QR Code**
+   - Buka WhatsApp di HP
+   - Settings → Linked Devices → Link a Device
+   - Scan QR code dari browser
+
+3. **Verify Connection**
+   - Cek status: `https://your-app-name.onrender.com/status`
+   - Bot status harus "Connected"
+
+### Step 4: Test Bot
+
+Kirim pesan ke bot:
+- `ping` - Test koneksi
+- `tambah 50000 makan siang` - Tambah pengeluaran
+- `laporan hari ini` - Lihat laporan
+- `kategori` - Lihat kategori
+
+### Troubleshooting
+
+#### Database Connection Failed
+- Cek environment variables di Render dashboard
+- Pastikan Supabase database aktif
+- Cek log di Render dashboard
+
+#### QR Code Not Appearing
+- Bot belum terhubung ke WhatsApp
+- Cek log untuk error WhatsApp Web.js
+- Pastikan Puppeteer dependencies terinstall
+
+#### Bot Not Responding
+- Cek status bot di `/status`
+- Cek log di Render dashboard
+- Pastikan WhatsApp terhubung
+
+### Monitoring
+
+- **Health Check:** `https://your-app-name.onrender.com/health`
+- **Bot Status:** `https://your-app-name.onrender.com/status`
+- **QR Code:** `https://your-app-name.onrender.com/qr-page`
+
+### Free Tier Limitations
+
+- **Sleep after 15 minutes** of inactivity
+- **Wake up** when receiving HTTP request
+- **Limited resources** (512MB RAM, shared CPU)
+- **Auto-restart** every 24 hours
+
+### Upgrade to Paid Plan
+
+Untuk 24/7 uptime, upgrade ke paid plan:
+- **Starter:** $7/month - Always on
+- **Standard:** $25/month - More resources 

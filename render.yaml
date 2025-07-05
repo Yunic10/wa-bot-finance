@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: wa-finance-bot
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DB_HOST
+        value: zcuxxncdafmlrrxdcwgm.supabase.co
+      - key: DB_PORT
+        value: 5432
+      - key: DB_NAME
+        value: postgres
+      - key: DB_USER
+        value: postgres
+      - key: DB_PASSWORD
+        value: bobobotduit2229
+      - key: BOT_NAME
+        value: FinanceBot
+      - key: ADMIN_NUMBER
+        value: 6282314744505
+      - key: NODE_ENV
+        value: production
+      - key: MONTHLY_REPORT_CRON
+        value: 0 20 28-31 * *
+      - key: TZ
+        value: Asia/Jakarta 

@@ -35,19 +35,34 @@ const pool = new Pool(dbConfig);
 
 // Test database connection
 async function testConnection() {
-  try {
-    const client = await pool.connect();
-    console.log('✅ Database connected successfully');
-    client.release();
-    return true;
-  } catch (error) {
-    console.error('❌ Database connection failed:', error);
-    console.error('❌ Error details:', {
-      message: error.message,
-      code: error.code,
-      stack: error.stack
-    });
-    return false;
+  const maxRetries = 3;
+  let retryCount = 0;
+
+  while (retryCount < maxRetries) {
+    try {
+      console.log(`🔄 Attempting database connection (attempt ${retryCount + 1}/${maxRetries})...`);
+      
+      const client = await pool.connect();
+      console.log('✅ Database connected successfully');
+      client.release();
+      return true;
+    } catch (error) {
+      retryCount++;
+      console.error(`❌ Database connection attempt ${retryCount} failed:`, error.message);
+      
+      if (retryCount < maxRetries) {
+        console.log(`⏳ Retrying in 5 seconds...`);
+        await new Promise(resolve => setTimeout(resolve, 5000));
+      } else {
+        console.error('❌ Database connection failed after all retries:', error);
+        console.error('❌ Error details:', {
+          message: error.message,
+          code: error.code,
+          stack: error.stack
+        });
+        return false;
+      }
+    }
   }
 }
 

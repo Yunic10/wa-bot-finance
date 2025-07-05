@@ -21,8 +21,7 @@ if (process.env.DATABASE_URL) {
     database: process.env.DB_NAME || 'postgres',
     port: process.env.DB_PORT || 5432,
     ssl: {
-      rejectUnauthorized: false,
-      sslmode: 'require'
+      rejectUnauthorized: false
     },
     connectionTimeoutMillis: 30000, // 30 seconds
     idleTimeoutMillis: 30000,

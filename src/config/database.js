@@ -1,19 +1,35 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 
-const dbConfig = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME || 'postgres',
-  port: process.env.DB_PORT || 5432,
-  ssl: {
-    rejectUnauthorized: false,
-    sslmode: 'require'
-  },
-  connectionTimeoutMillis: 10000,
-  idleTimeoutMillis: 30000
-};
+// Use connection string if available, otherwise use individual config
+let dbConfig;
+
+if (process.env.DATABASE_URL) {
+  // Use connection string
+  dbConfig = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  };
+} else {
+  // Use individual config
+  dbConfig = {
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'postgres',
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME || 'postgres',
+    port: process.env.DB_PORT || 5432,
+    ssl: {
+      rejectUnauthorized: false,
+      sslmode: 'require'
+    },
+    connectionTimeoutMillis: 30000, // 30 seconds
+    idleTimeoutMillis: 30000,
+    max: 20, // Maximum number of clients in the pool
+    min: 2   // Minimum number of clients in the pool
+  };
+}
 
 const pool = new Pool(dbConfig);
 

@@ -47,6 +47,11 @@ class WhatsAppFinanceBot {
       });
     });
 
+    // Root endpoint
+    this.app.get('/', (req, res) => {
+      res.send('WhatsApp Finance Bot is running! 🚀');
+    });
+
     const PORT = process.env.PORT || 3000;
     this.app.listen(PORT, () => {
       console.log(`🌐 Express server running on port ${PORT}`);

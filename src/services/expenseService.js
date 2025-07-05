@@ -5,34 +5,34 @@ class ExpenseService {
   // Add new expense
   async addExpense(phoneNumber, amount, description, categoryName, date = null) {
     try {
-      const connection = await pool.getConnection();
+      const client = await pool.connect();
       
       // Get or create user
-      let [userRows] = await connection.execute(
-        'SELECT id FROM users WHERE phone_number = ?',
+      const userResult = await client.query(
+        'SELECT id FROM users WHERE phone_number = $1',
         [phoneNumber]
       );
       
       let userId;
-      if (userRows.length === 0) {
-        const [result] = await connection.execute(
-          'INSERT INTO users (phone_number) VALUES (?)',
+      if (userResult.rows.length === 0) {
+        const result = await client.query(
+          'INSERT INTO users (phone_number) VALUES ($1) RETURNING id',
           [phoneNumber]
         );
-        userId = result.insertId;
+        userId = result.rows[0].id;
       } else {
-        userId = userRows[0].id;
+        userId = userResult.rows[0].id;
       }
 
       // Get category ID
       let categoryId = null;
       if (categoryName) {
-        const [categoryRows] = await connection.execute(
-          'SELECT id FROM categories WHERE name = ?',
+        const categoryResult = await client.query(
+          'SELECT id FROM categories WHERE name = $1',
           [categoryName]
         );
-        if (categoryRows.length > 0) {
-          categoryId = categoryRows[0].id;
+        if (categoryResult.rows.length > 0) {
+          categoryId = categoryResult.rows[0].id;
         }
       }
 
@@ -40,15 +40,15 @@ class ExpenseService {
       const expenseDate = date || moment().format('YYYY-MM-DD');
 
       // Insert expense
-      const [result] = await connection.execute(
-        'INSERT INTO expenses (user_id, category_id, amount, description, date) VALUES (?, ?, ?, ?, ?)',
+      const result = await client.query(
+        'INSERT INTO expenses (user_id, category_id, amount, description, date) VALUES ($1, $2, $3, $4, $5) RETURNING id',
         [userId, categoryId, amount, description, expenseDate]
       );
 
-      connection.release();
+      client.release();
       return {
         success: true,
-        expenseId: result.insertId,
+        expenseId: result.rows[0].id,
         message: 'Pengeluaran berhasil ditambahkan'
       };
     } catch (error) {
@@ -63,52 +63,56 @@ class ExpenseService {
   // Get user expenses for a specific period
   async getUserExpenses(phoneNumber, startDate = null, endDate = null) {
     try {
-      const connection = await pool.getConnection();
+      const client = await pool.connect();
       
       // Get user ID
-      const [userRows] = await connection.execute(
-        'SELECT id FROM users WHERE phone_number = ?',
+      const userResult = await client.query(
+        'SELECT id FROM users WHERE phone_number = $1',
         [phoneNumber]
       );
       
-      if (userRows.length === 0) {
-        connection.release();
+      if (userResult.rows.length === 0) {
+        client.release();
         return {
           success: false,
           message: 'User tidak ditemukan'
         };
       }
 
-      const userId = userRows[0].id;
+      const userId = userResult.rows[0].id;
       
       // Build query with date filters
       let query = `
         SELECT e.*, c.name as category_name 
         FROM expenses e 
         LEFT JOIN categories c ON e.category_id = c.id 
-        WHERE e.user_id = ?
+        WHERE e.user_id = $1
       `;
       const params = [userId];
+      let paramIndex = 2;
 
       if (startDate && endDate) {
-        query += ' AND e.date BETWEEN ? AND ?';
+        query += ` AND e.date BETWEEN $${paramIndex} AND $${paramIndex + 1}`;
         params.push(startDate, endDate);
+        paramIndex += 2;
       } else if (startDate) {
-        query += ' AND e.date >= ?';
+        query += ` AND e.date >= $${paramIndex}`;
         params.push(startDate);
+        paramIndex += 1;
       } else if (endDate) {
-        query += ' AND e.date <= ?';
+        query += ` AND e.date <= $${paramIndex}`;
         params.push(endDate);
+        paramIndex += 1;
       }
 
       query += ' ORDER BY e.date DESC, e.created_at DESC';
 
-      const [expenses] = await connection.execute(query, params);
-      connection.release();
+      const expensesResult = await client.query(query, params);
+      client.release();
 
       return {
         success: true,
-        expenses: expenses
+        expenses: expensesResult.rows
       };
     } catch (error) {
       console.error('Error getting user expenses:', error);
@@ -122,59 +126,59 @@ class ExpenseService {
   // Get monthly summary
   async getMonthlySummary(phoneNumber, year, month) {
     try {
-      const connection = await pool.getConnection();
+      const client = await pool.connect();
       
       // Get user ID
-      const [userRows] = await connection.execute(
-        'SELECT id FROM users WHERE phone_number = ?',
+      const userResult = await client.query(
+        'SELECT id FROM users WHERE phone_number = $1',
         [phoneNumber]
       );
       
-      if (userRows.length === 0) {
-        connection.release();
+      if (userResult.rows.length === 0) {
+        client.release();
         return {
           success: false,
           message: 'User tidak ditemukan'
         };
       }
 
-      const userId = userRows[0].id;
+      const userId = userResult.rows[0].id;
       
       // Get total expenses for the month
-      const [totalResult] = await connection.execute(
-        'SELECT SUM(amount) as total FROM expenses WHERE user_id = ? AND YEAR(date) = ? AND MONTH(date) = ?',
+      const totalResult = await client.query(
+        'SELECT SUM(amount) as total FROM expenses WHERE user_id = $1 AND EXTRACT(YEAR FROM date) = $2 AND EXTRACT(MONTH FROM date) = $3',
         [userId, year, month]
       );
 
       // Get expenses by category
-      const [categoryResult] = await connection.execute(
+      const categoryResult = await client.query(
         `SELECT c.name as category, SUM(e.amount) as total 
          FROM expenses e 
          LEFT JOIN categories c ON e.category_id = c.id 
-         WHERE e.user_id = ? AND YEAR(e.date) = ? AND MONTH(e.date) = ? 
+         WHERE e.user_id = $1 AND EXTRACT(YEAR FROM e.date) = $2 AND EXTRACT(MONTH FROM e.date) = $3 
          GROUP BY c.id, c.name 
          ORDER BY total DESC`,
         [userId, year, month]
       );
 
       // Get daily expenses
-      const [dailyResult] = await connection.execute(
+      const dailyResult = await client.query(
         `SELECT DATE(date) as date, SUM(amount) as total 
          FROM expenses 
-         WHERE user_id = ? AND YEAR(date) = ? AND MONTH(date) = ? 
+         WHERE user_id = $1 AND EXTRACT(YEAR FROM date) = $2 AND EXTRACT(MONTH FROM date) = $3 
          GROUP BY DATE(date) 
          ORDER BY date DESC`,
         [userId, year, month]
       );
 
-      connection.release();
+      client.release();
 
       return {
         success: true,
         summary: {
-          total: totalResult[0].total || 0,
-          byCategory: categoryResult,
-          byDay: dailyResult,
+          total: totalResult.rows[0].total || 0,
+          byCategory: categoryResult.rows,
+          byDay: dailyResult.rows,
           year: year,
           month: month
         }
@@ -191,12 +195,12 @@ class ExpenseService {
   // Get all categories
   async getCategories() {
     try {
-      const connection = await pool.getConnection();
-      const [categories] = await connection.execute('SELECT * FROM categories ORDER BY name');
-      connection.release();
+      const client = await pool.connect();
+      const categoriesResult = await client.query('SELECT * FROM categories ORDER BY name');
+      client.release();
       return {
         success: true,
-        categories: categories
+        categories: categoriesResult.rows
       };
     } catch (error) {
       console.error('Error getting categories:', error);
@@ -210,33 +214,33 @@ class ExpenseService {
   // Delete expense
   async deleteExpense(phoneNumber, expenseId) {
     try {
-      const connection = await pool.getConnection();
+      const client = await pool.connect();
       
       // Get user ID
-      const [userRows] = await connection.execute(
-        'SELECT id FROM users WHERE phone_number = ?',
+      const userResult = await client.query(
+        'SELECT id FROM users WHERE phone_number = $1',
         [phoneNumber]
       );
       
-      if (userRows.length === 0) {
-        connection.release();
+      if (userResult.rows.length === 0) {
+        client.release();
         return {
           success: false,
           message: 'User tidak ditemukan'
         };
       }
 
-      const userId = userRows[0].id;
+      const userId = userResult.rows[0].id;
       
       // Delete expense
-      const [result] = await connection.execute(
-        'DELETE FROM expenses WHERE id = ? AND user_id = ?',
+      const result = await client.query(
+        'DELETE FROM expenses WHERE id = $1 AND user_id = $2',
         [expenseId, userId]
       );
 
-      connection.release();
+      client.release();
 
-      if (result.affectedRows > 0) {
+      if (result.rowCount > 0) {
         return {
           success: true,
           message: 'Pengeluaran berhasil dihapus'

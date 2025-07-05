@@ -180,13 +180,13 @@ class MessageHandler {
   async sendMonthlyReportToAllUsers() {
     try {
       const { pool } = require('../config/database');
-      const connection = await pool.getConnection();
+      const client = await pool.connect();
       
       // Get all users
-      const [users] = await connection.execute('SELECT phone_number FROM users');
-      connection.release();
+      const usersResult = await client.query('SELECT phone_number FROM users');
+      client.release();
 
-      if (users.length === 0) {
+      if (usersResult.rows.length === 0) {
         console.log('No users found for monthly report');
         return;
       }
@@ -195,9 +195,9 @@ class MessageHandler {
       const year = currentDate.year();
       const month = currentDate.month() + 1; // moment months are 0-indexed
 
-      console.log(`📊 Sending monthly reports for ${month}/${year} to ${users.length} users`);
+      console.log(`📊 Sending monthly reports for ${month}/${year} to ${usersResult.rows.length} users`);
 
-      for (const user of users) {
+      for (const user of usersResult.rows) {
         try {
           const summaryResult = await expenseService.getMonthlySummary(user.phone_number, year, month);
           
